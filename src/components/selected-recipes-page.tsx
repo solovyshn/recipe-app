@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Pagination from "./pagination";
 import '../App.css';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Meal {
     idMeal: string;
@@ -23,6 +24,7 @@ function SelectedRecipesPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10);
     const [combinedIngredients, setCombinedIngredients] = useState<{ [key: string]: { amount: number; measure: string } }>({}); // Initialize combined ingredients state
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -94,9 +96,12 @@ function SelectedRecipesPage() {
     const indexOfLastRecipe = currentPage * itemsPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - itemsPerPage;
     const currentRecipes = recipeData ? recipeData.meals.slice(indexOfFirstRecipe, indexOfLastRecipe) : [];
-
+    const goToAllRecipesPage = () => {
+        navigate(`/`);
+    };
     return (
         <div className="AllRecipes">
+            <button className="selected-recipes-btn"  onClick={goToAllRecipesPage}>Back</button>
             <h1>Selected Recipes</h1>
             <div className="container">
                 <div>
@@ -125,7 +130,7 @@ function SelectedRecipesPage() {
                         <ul>
                             {Object.entries(combinedIngredients).map(([ingredient, { amount, measure }]) => (
                                 <li key={ingredient}>
-                                    {ingredient}: {amount} {measure}
+                                    {ingredient}: {amount}x {measure}
                                 </li>
                             ))}
                         </ul>

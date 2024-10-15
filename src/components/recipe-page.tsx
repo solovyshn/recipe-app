@@ -109,7 +109,7 @@ function RecipePage() {
     return (
         <div className="Recipe">
             <header className="">
-                <button onClick={goToAllRecipesPage}>Back</button>
+                <button className="selected-recipes-btn"  onClick={goToAllRecipesPage}>Back</button>
             </header>
             <div className="container">
                 { recipeData ? (

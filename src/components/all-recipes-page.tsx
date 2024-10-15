@@ -179,7 +179,7 @@ function AllRecipesPage() {
         <div className="AllRecipes">
             <div className="search">
                 <input className="search-input" type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for recipes..."/>
-                {selectedRecipeIds.size>0 ? (<button className="selected-recipes-btn" onClick={goToSelectedPage}>See selected recipes</button>):(<span></span>)}
+                <button className="selected-recipes-btn" onClick={goToSelectedPage}>See selected recipes</button>
                 <select value={selectedCategory} className="filter-dropdown" onChange={(e) => setSelectedCategory(e.target.value)}>
                     <option value="">All Categories</option>
                     {categories.map((category, index) => (
